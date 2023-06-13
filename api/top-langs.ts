@@ -20,6 +20,7 @@ export interface query {
 	theme?: keyof typeof themes
 	cache_seconds?: string
 	layout?: string
+	title?: string
 }
 
 export default async (req: Request<unknown, unknown, unknown, query>, res: Response) => {
@@ -35,7 +36,8 @@ export default async (req: Request<unknown, unknown, unknown, query>, res: Respo
 		language_count,
 		theme,
 		cache_seconds,
-		layout
+		layout,
+		title,
 	} = req.query
 
 	prepareResponse(res)
@@ -53,6 +55,7 @@ export default async (req: Request<unknown, unknown, unknown, query>, res: Respo
 				layout,
 				text_color,
 				theme,
+				title,
 				title_color,
 				bg_color,
 				hide_border: parseBoolean(hide_border),
