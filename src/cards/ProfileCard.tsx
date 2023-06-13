@@ -18,6 +18,7 @@ interface ProfileCardOptions extends CardOptions {
 	line_height?: number
 	icon_color?: string
 	text_color?: string
+	title?: string
 }
 
 export default class ProfileCard extends Card {
@@ -39,9 +40,8 @@ export default class ProfileCard extends Card {
 		private recentXp: number,
 		private options: ProfileCardOptions
 	) {
-		super(
-			options
-		)
+
+		super(options)
 
 		// This Element
 		this.stats = {
@@ -64,7 +64,7 @@ export default class ProfileCard extends Card {
 			options.hide_rank ? 0 : 120
 		)
 
-		this.title = `${encodeHTML(this.username)}${
+		this.title = this.options.title ?? `${encodeHTML(this.username)}${
 			['x', 's'].includes(this.username.slice(-1)) ? '\'' : '\'s'
 		} Code::Stats Profile`
 

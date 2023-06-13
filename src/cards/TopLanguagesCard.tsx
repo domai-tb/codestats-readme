@@ -10,6 +10,7 @@ interface TopLanguagesOptions extends CardOptions {
 	card_width?: number
 	layout?: string
 	text_color?: string
+	title?: string
 }
 
 export default class TopLanguagesCard extends Card {
@@ -21,11 +22,9 @@ export default class TopLanguagesCard extends Card {
 	) {
 		super(options)
 
-
 		this.langs = this.langs
 			.filter((item) => !(options.hide || []).includes(item.name))
 			.slice(0, options.language_count || 5)
-
 
 		this.height = 45 + (this.langs.length + 1) * 40
 		this.width = 300
@@ -34,7 +33,7 @@ export default class TopLanguagesCard extends Card {
 		}
 
 		const textColor = getColor('text_color', options.text_color, options.theme)
-		this.title = 'Most Used Languages'
+		this.title = this.options.title ?? 'Most Used Languages'
 		this.css = CompactTextNode.getCSS(textColor as string)
 	}
 

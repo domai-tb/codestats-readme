@@ -15,6 +15,7 @@ export interface query {
 	icon_color?: string
 	text_color?: string
 	cache_seconds?: string
+	title?: string
 
 	// Mater
 	bg_color?: string
@@ -34,6 +35,7 @@ export default async (req: Request<unknown, unknown, unknown, query>, res: Respo
 		icon_color,
 		text_color,
 		cache_seconds,
+		title,
 
 		// Master
 		bg_color,
@@ -59,11 +61,12 @@ export default async (req: Request<unknown, unknown, unknown, query>, res: Respo
 				hide_border: parseBoolean(hide_border),
 				hide_rank: parseBoolean(hide_rank),
 				line_height: parseNumber(line_height),
+				title,
 				title_color,
 				icon_color,
 				text_color,
 				bg_color,
-				theme
+				theme,
 			}).render()
 		))
 	} catch (err) {
