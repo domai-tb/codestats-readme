@@ -24,7 +24,7 @@
 	"dependencies": {
 		"@dzeio/config": "^1.1.8",
 		"express": "^4",
-		"node-fetch": "^2",
+		"node-fetch": "^3",
 		"react": "^18",
 		"react-dom": "^18",
 		"typescript": "^4",
