@@ -95,7 +95,7 @@ docker run your-tag
 ## NPM
 
 ```shell
-npm ci
+npm install
 npm run build
 npm run start
 ```

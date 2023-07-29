@@ -1,5 +1,4 @@
 import express from 'express'
-import api from './api/profile'
 import history from './api/history'
 import topLangs from './api/top-langs'
 import profile from './api/profile'

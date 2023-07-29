@@ -1,7 +1,23 @@
 {
-	"name": "github-readme-stats",
+	"name": "codestats-readme",
 	"version": "1.0.0",
-	"description": "Dynamically generate stats for your github readmes",
+	"description": "Dynamically generated Code::Stats SVGs for your GitHub Readmes",
+	"author": {
+		"name": "Anurag Hazra",
+		"url": "https://github.com/Aviortheking"
+	},
+	"contributors": [
+		{
+			"name": ":Domai",
+			"email": "coding@domai-tb.com",
+			"url": "https://github.com/domai-tb"
+		}
+	],
+	"license": "MIT",
+	"homepage": "https://github.com/domai-tb/codestats-readme",
+	"bugs": {
+		"url": "https://github.com/domai-tb/codestats-readme/issues"
+	},
 	"main": "index.js",
 	"scripts": {
 		"dev": "ts-node ./index.ts",
@@ -9,25 +25,23 @@
 		"start": "node dist/index.js",
 		"theme-readme-gen": "ts-node scripts/generate-theme-doc"
 	},
-	"author": "Anurag Hazra",
-	"license": "MIT",
 	"devDependencies": {
 		"@types/express": "^4",
 		"@types/node-fetch": "^2",
 		"@types/react": "^18",
 		"@types/react-dom": "^18",
 		"@typescript-eslint/eslint-plugin": "^6",
-		"@typescript-eslint/parser": "^5",
+		"@typescript-eslint/parser": "^6",
 		"eslint": "^8",
 		"ts-node": "^10"
 	},
 	"dependencies": {
-		"@dzeio/config": "^1.1.12",
+		"@dzeio/config": "^1",
 		"express": "^4",
-		"node-fetch": "^3",
+		"node-fetch": "^2",
 		"react": "^18",
 		"react-dom": "^18",
-		"typescript": "^4",
+		"typescript": "^5",
 		"word-wrap": "^1"
 	}
 }

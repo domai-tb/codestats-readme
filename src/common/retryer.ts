@@ -8,12 +8,10 @@ export default async function retryer<T = Promise<CodeStatsResponse>>(
 	err?: any
 ): Promise<T> {
 	if (retries > 7) {
-		throw new CustomError('Maximum retries exceeded' + err, 'MAX_RETRY')
+		throw new CustomError('Maximum retries exceeded. ' + err, 'MAX_RETRY')
 	}
 	try {
-		return await fetcher(
-			data
-		)
+		return await fetcher(data)
 	} catch (err) {
 		return retryer(fetcher, data, ++retries, err)
 	}
