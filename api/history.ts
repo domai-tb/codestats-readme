@@ -48,7 +48,6 @@ export default async (req: Request<unknown, unknown, unknown, query>, res: Respo
 	} = req.query
 
 	prepareResponse(res)
-	console.log(theme)
 
 	try {
 		const data = await fetchHistory(username, clampValue(parseNumber(days_count) || 14, 1, 30))

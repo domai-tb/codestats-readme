@@ -88,14 +88,14 @@ Both ways will create a webserver that listens on port 3000.
 ## Docker
 
 ```shell
-docker build . --tag your-tag
-docker run your-tag
+docker build . --tag codestats-readme
+docker run codestats-readme
 ```
 
 ## NPM
 
 ```shell
-npm ci
+npm install
 npm run build
 npm run start
 ```

@@ -45,7 +45,7 @@ export async function request(username: string): Promise<CodeStatsResponse> {
 	const resp = await fetch(
 		`https://codestats.net/api/users/${username}`
 	)
-	return resp.json()
+	return resp.json() as Promise<CodeStatsResponse>;
 }
 
 export async function profileGraphRequest<T>(body: string): Promise<T> {
@@ -56,7 +56,7 @@ export async function profileGraphRequest<T>(body: string): Promise<T> {
 			method: 'POST'
 		}
 	)
-	return resp.json()
+	return resp.json() as Promise<T>;
 }
 
 export function getColor(
