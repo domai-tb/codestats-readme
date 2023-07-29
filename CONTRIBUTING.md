@@ -1,4 +1,4 @@
-# Contributing to [github-readme-stats](https://github.com/anuraghazra/github-readme-stats)
+# Contributing to [github-readme-stats](https://github.com/domai-tb/github-readme-stats)
 
 We love your input! We want to make contributing to this project as easy and transparent as possible, whether it's:
 
@@ -13,21 +13,9 @@ We love your input! We want to make contributing to this project as easy and tra
 Pull requests are the best way to propose changes. We actively welcome your pull requests:
 
 1. Fork the repo and create your branch from `master`.
-1. If you've added code that should be tested, add some tests' example.
-1. If you've changed APIs, update the documentation.
-1. Issue that pull request!
-
-## Local Development
-
-To run & test github-readme-stats you need to follow few simple steps :-
-_(make sure you already have a [vercel](https://vercel.com/) account)_
-
-1. Install [Vercel CLI](https://vercel.com/download)
-1. Fork the repository and clone the code to your local machine
-1. Run the command "vercel" in the root and follow the steps there
-1. Create a `.env` file in the root of the directory
-1. In the .env file add a new variable named "PAT" with your [github Personal access token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token)
-1. Run the command "vercel dev" to start a development server at https://localhost:3000
+2. If you've added code that should be tested, add some tests' example.
+3. If you've changed APIs, update the documentation.
+4. Issue that pull request!
 
 ## Themes Contribution
 
@@ -43,9 +31,9 @@ While creating the Pull request to add a new theme **don't forget to add a scree
 
 In short, when you submit changes, your submissions are understood to be under the same [MIT License](http://choosealicense.com/licenses/mit/) that covers the project. Feel free to contact the maintainers if that's a concern.
 
-## Report issues/bugs using GitHub's [issues](https://github.com/anuraghazra/github-readme-stats/issues)
+## Report issues/bugs using GitHub's [issues](https://github.com/domai-tb/github-readme-stats/issues)
 
-We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/anuraghazra/github-readme-stats/issues/new/choose); it's that easy!
+We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/domai-tb/github-readme-stats/issues/new/choose); it's that easy!
 
 ## Frequently Asked Questions (FAQs)
 
