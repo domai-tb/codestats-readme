@@ -89,7 +89,7 @@ Both ways will create a webserver that listens on port 3000.
 
 ```shell
 docker build . --tag codestats-readme
-docker run codestats-readme
+docker run -d -p 3000:3000 --name codestats codestats-readme:latest
 ```
 
 ## NPM
