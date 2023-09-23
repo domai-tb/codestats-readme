@@ -14,11 +14,14 @@ import {
 
 async function main() {
   try {
-    const username = "domai-tb"; //core.getInput("username");
+    const username = core.getInput("username");
+
+    // Fetch Code::Stats API
     const profile = await fetchProfile(username);
     const toplang = await fetchTopLanguages(username);
     const history = await fetchHistory(username, 32);
 
+    // Generate Profile Summary Card
     const profilecard = ReactDOMServer.renderToStaticMarkup(
       new ProfileCard(profile.username, profile.xp, profile.recentXp, {
         hide: parseArray(core.getInput("hide")),
@@ -35,11 +38,18 @@ async function main() {
       }).render()
     );
 
+    console.log(`Generated ./codestats_profilecard_${username}.svg`);
+    fs.writeFileSync(`./codestats_profilecard_${username}.svg`, profilecard);
+
+    // Generate Top Languages Card
     const toplangcard = ReactDOMServer.renderToStaticMarkup(
       new TopLanguagesCard(username, toplang.langs, {
         hide: parseArray(core.getInput("hide")),
         language_count: 21, // parseNumber(core.getInput("language_count")),
-        card_width: clampValue(parseNumber(core.getInput("card_width")) || 300, 500),
+        card_width: clampValue(
+          parseNumber(core.getInput("card_width")) || 300,
+          500
+        ),
         layout: "compact", // core.getInput("layout")
         title: `Code::Stats of ${username}`, // core.getInput("title"),
         title_color: core.getInput("title_color"),
@@ -50,6 +60,10 @@ async function main() {
       }).render()
     );
 
+    console.log(`Generated ./codestats_toplangs_${username}.svg`);
+    fs.writeFileSync(`./codestats_toplangs_${username}.svg`, toplangcard);
+
+    // Generate History Card
     const historycard = ReactDOMServer.renderToStaticMarkup(
       new HistoryCard(username, history, {
         hide: parseArray(core.getInput("hide")),
@@ -67,13 +81,11 @@ async function main() {
       }).render()
     );
 
-    fs.writeFileSync(`./codestats_profilecard_${username}.svg`, profilecard);
-    fs.writeFileSync(`./codestats_toplangs_${username}.svg`, toplangcard);
+    console.log(`Generated ./codestats_history_${username}.svg`);
     fs.writeFileSync(`./codestats_history_${username}.svg`, historycard);
-
   } catch (error) {
-    //core.setFailed(error.message);
     console.log(error);
+    //core.setFailed(error.message);
   }
 }
 
