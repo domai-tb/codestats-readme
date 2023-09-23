@@ -4,7 +4,7 @@ description: An infographics generator to display stats about your Code::Stats a
 
 runs:
   using: 'node20'
-  main: 'action.ts'
+  main: 'dist/action.js'
 
 inputs:
   username:
