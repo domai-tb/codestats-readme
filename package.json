@@ -37,7 +37,6 @@
 		"ts-node": "^10"
 	},
 	"dependencies": {
-		"@dzeio/config": "^1",
 		"express": "^4",
 		"node-fetch": "^2",
 		"react": "^18",
