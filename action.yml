@@ -11,3 +11,78 @@ inputs:
     description: Code::Sats account username
     required: true
     default: domai-tb
+
+  show_icons:
+    description: Generate profile card with icons
+    required: false
+    default: true
+
+  hide_rank:
+    description: Generate profile card without level / rank
+    required: false
+    default: false
+
+  hide_title:
+    description: Generate cards without title
+    required: false
+    default: false
+
+  hide_border:
+    description: Generate cards without border
+    required: false
+    default: false
+
+  line_height:
+    description: Line hight for profile card
+    required: false
+    default: 45
+
+  title_color:
+    description: Color of profile card title
+    required: false
+
+  icon_color:
+    description: Color of profile card icons
+    required: false
+
+  text_color:
+    description: Color of profile card text
+    required: false
+
+  bg_color:
+    description: Color of top language card background
+    required: false
+
+  language_count:
+    description: Number of language to display on cards
+    required: false
+    default: 21
+
+  hide:
+    description: Hide specific language from top lang card
+    required: false
+
+  card_width:
+    description: Width of top languages card in px
+    required: false
+    default: 300
+
+  card_width:
+    description: Higths of top languages card in px
+    required: false
+    default: 300
+
+  layout:
+    description: Layout of top lang card
+    required: false
+    default: compact
+
+  hide_legend:
+    description: Generate history card without legend
+    required: false
+    default: false
+
+  reverse_order:
+    description: Order history from old to new
+    required: false
+    default: false

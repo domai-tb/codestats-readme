@@ -25,16 +25,16 @@ async function main() {
     const profilecard = ReactDOMServer.renderToStaticMarkup(
       new ProfileCard(profile.username, profile.xp, profile.recentXp, {
         hide: parseArray(core.getInput("hide")),
-        show_icons: true, // parseBoolean(core.getInput("show_icons")),
-        hide_rank: false, // parseBoolean(core.getInput("hide_rank")),
-        line_height: 45, // parseNumber(core.getInput("line_height")),
+        show_icons: parseBoolean(core.getInput("show_icons")),
+        hide_rank: parseBoolean(core.getInput("hide_rank")),
+        line_height: parseNumber(core.getInput("line_height")),
         title: `Code::Stats of ${username}`, // core.getInput("title"),
         title_color: core.getInput("title_color"),
         icon_color: core.getInput("icon_color"),
         text_color: core.getInput("text_color"),
         bg_color: core.getInput("bg_color"),
-        hide_title: false, // parseBoolean(core.getInput("hide_title")),
-        hide_border: false, //parseBoolean(core.getInput("hide_border")),
+        hide_title: parseBoolean(core.getInput("hide_title")),
+        hide_border: parseBoolean(core.getInput("hide_border")),
       }).render()
     );
 
@@ -45,18 +45,18 @@ async function main() {
     const toplangcard = ReactDOMServer.renderToStaticMarkup(
       new TopLanguagesCard(username, toplang.langs, {
         hide: parseArray(core.getInput("hide")),
-        language_count: 21, // parseNumber(core.getInput("language_count")),
+        language_count: parseNumber(core.getInput("language_count")),
         card_width: clampValue(
           parseNumber(core.getInput("card_width")) || 300,
           500
         ),
-        layout: "compact", // core.getInput("layout")
+        layout: core.getInput("layout"),
         title: `Code::Stats of ${username}`, // core.getInput("title"),
         title_color: core.getInput("title_color"),
         text_color: core.getInput("text_color"),
         bg_color: core.getInput("bg_color"),
-        hide_title: false, // parseBoolean(core.getInput("hide_title")),
-        hide_border: false, //parseBoolean(core.getInput("hide_border")),
+        hide_title: parseBoolean(core.getInput("hide_title")),
+        hide_border: parseBoolean(core.getInput("hide_border")),
       }).render()
     );
 
@@ -67,25 +67,29 @@ async function main() {
     const historycard = ReactDOMServer.renderToStaticMarkup(
       new HistoryCard(username, history, {
         hide: parseArray(core.getInput("hide")),
-        language_count: 21, // parseNumber(core.getInput("language_count")),
+        language_count: parseNumber(core.getInput("language_count")),
         hide_legend: parseBoolean(core.getInput("hide_legend")),
         reverse_order: parseBoolean(core.getInput("reverse_order")),
         width: clampValue(parseNumber(core.getInput("card_width")) || 300, 500),
-        height: clampValue(parseNumber(core.getInput("height")) || 300, 200),
+        height: clampValue(parseNumber(core.getInput("card_height")) || 300, 200),
         title_color: core.getInput("title_color"),
         text_color: core.getInput("text_color"),
         bg_color: core.getInput("bg_color"),
         layout: undefined, // core.getInput("layout")
-        hide_title: false, // parseBoolean(core.getInput("hide_title")),
-        hide_border: false, //parseBoolean(core.getInput("hide_border")),
+        hide_title: parseBoolean(core.getInput("hide_title")),
+        hide_border: parseBoolean(core.getInput("hide_border")),
       }).render()
     );
 
     console.log(`Generated ./codestats_history_${username}.svg`);
     fs.writeFileSync(`./codestats_history_${username}.svg`, historycard);
+
   } catch (error) {
-    console.log(error);
-    //core.setFailed(error.message);
+    if (error instanceof Error) {
+      core.setFailed(error.message);
+    } else {
+      console.log(error);
+    }
   }
 }
 

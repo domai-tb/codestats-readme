@@ -89,53 +89,58 @@ function main() {
                     history_1 = _a.sent();
                     profilecard = server_1.default.renderToStaticMarkup(new ProfileCard_1.default(profile.username, profile.xp, profile.recentXp, {
                         hide: (0, utils_1.parseArray)(core.getInput("hide")),
-                        show_icons: true,
-                        hide_rank: false,
-                        line_height: 45,
+                        show_icons: (0, utils_1.parseBoolean)(core.getInput("show_icons")),
+                        hide_rank: (0, utils_1.parseBoolean)(core.getInput("hide_rank")),
+                        line_height: (0, utils_1.parseNumber)(core.getInput("line_height")),
                         title: "Code::Stats of ".concat(username),
                         title_color: core.getInput("title_color"),
                         icon_color: core.getInput("icon_color"),
                         text_color: core.getInput("text_color"),
                         bg_color: core.getInput("bg_color"),
-                        hide_title: false,
-                        hide_border: false, //parseBoolean(core.getInput("hide_border")),
+                        hide_title: (0, utils_1.parseBoolean)(core.getInput("hide_title")),
+                        hide_border: (0, utils_1.parseBoolean)(core.getInput("hide_border")),
                     }).render());
                     console.log("Generated ./codestats_profilecard_".concat(username, ".svg"));
                     fs.writeFileSync("./codestats_profilecard_".concat(username, ".svg"), profilecard);
                     toplangcard = server_1.default.renderToStaticMarkup(new TopLanguagesCard_1.default(username, toplang.langs, {
                         hide: (0, utils_1.parseArray)(core.getInput("hide")),
-                        language_count: 21,
+                        language_count: (0, utils_1.parseNumber)(core.getInput("language_count")),
                         card_width: (0, utils_1.clampValue)((0, utils_1.parseNumber)(core.getInput("card_width")) || 300, 500),
-                        layout: "compact",
+                        layout: core.getInput("layout"),
                         title: "Code::Stats of ".concat(username),
                         title_color: core.getInput("title_color"),
                         text_color: core.getInput("text_color"),
                         bg_color: core.getInput("bg_color"),
-                        hide_title: false,
-                        hide_border: false, //parseBoolean(core.getInput("hide_border")),
+                        hide_title: (0, utils_1.parseBoolean)(core.getInput("hide_title")),
+                        hide_border: (0, utils_1.parseBoolean)(core.getInput("hide_border")),
                     }).render());
                     console.log("Generated ./codestats_toplangs_".concat(username, ".svg"));
                     fs.writeFileSync("./codestats_toplangs_".concat(username, ".svg"), toplangcard);
                     historycard = server_1.default.renderToStaticMarkup(new HistoryCard_1.default(username, history_1, {
                         hide: (0, utils_1.parseArray)(core.getInput("hide")),
-                        language_count: 21,
+                        language_count: (0, utils_1.parseNumber)(core.getInput("language_count")),
                         hide_legend: (0, utils_1.parseBoolean)(core.getInput("hide_legend")),
                         reverse_order: (0, utils_1.parseBoolean)(core.getInput("reverse_order")),
                         width: (0, utils_1.clampValue)((0, utils_1.parseNumber)(core.getInput("card_width")) || 300, 500),
-                        height: (0, utils_1.clampValue)((0, utils_1.parseNumber)(core.getInput("height")) || 300, 200),
+                        height: (0, utils_1.clampValue)((0, utils_1.parseNumber)(core.getInput("card_height")) || 300, 200),
                         title_color: core.getInput("title_color"),
                         text_color: core.getInput("text_color"),
                         bg_color: core.getInput("bg_color"),
                         layout: undefined,
-                        hide_title: false,
-                        hide_border: false, //parseBoolean(core.getInput("hide_border")),
+                        hide_title: (0, utils_1.parseBoolean)(core.getInput("hide_title")),
+                        hide_border: (0, utils_1.parseBoolean)(core.getInput("hide_border")),
                     }).render());
                     console.log("Generated ./codestats_history_".concat(username, ".svg"));
                     fs.writeFileSync("./codestats_history_".concat(username, ".svg"), historycard);
                     return [3 /*break*/, 5];
                 case 4:
                     error_1 = _a.sent();
-                    console.log(error_1);
+                    if (error_1 instanceof Error) {
+                        core.setFailed(error_1.message);
+                    }
+                    else {
+                        console.log(error_1);
+                    }
                     return [3 /*break*/, 5];
                 case 5: return [2 /*return*/];
             }
