@@ -67,7 +67,7 @@ inputs:
     required: false
     default: 300
 
-  card_width:
+  card_height:
     description: Higths of top languages card in px
     required: false
     default: 300
