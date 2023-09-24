@@ -28,7 +28,6 @@ inputs:
     description: "Hide specific line, eg: `xp` or `xp,recent_xp`"
     required: false
     type: string
-    default: undefiend
 
   profile_card_show_icons:
     description: Shows icons before each lines
