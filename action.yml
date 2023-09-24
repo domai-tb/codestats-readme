@@ -17,7 +17,7 @@ inputs:
     description: Change the cards title
     required: false
     type: string
-    default: `Code::Stats of ${username}`
+    default: "`Code::Stats of ${username}`"
 
   profile_card_hide_lines:
     description: "Hide specific line, eg: `xp` or `xp,recent_xp`"
@@ -47,7 +47,7 @@ inputs:
     description: Change the cards title
     required: false
     type: string
-    default: `Code::Stats of ${username}`
+    default: "`Code::Stats of ${username}`"
 
   toplangs_card_language_count:
     description: Change the number of languages shown before going to Others
