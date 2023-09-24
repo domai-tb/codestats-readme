@@ -13,6 +13,12 @@ inputs:
     type: string
     default: domai-tb
 
+  theme:
+    description: The theme to use. See ./themes/themes.json
+    required: false
+    type: string
+    default: dark
+
   profile_card_title:
     description: Change the cards title
     required: false
