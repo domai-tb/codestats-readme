@@ -1,6 +1,6 @@
 import * as core from "@actions/core";
 import * as fs from "fs";
-import themes from './themes/themes.json'
+import themes from "./themes/themes.json";
 import { fetchProfile, fetchTopLanguages, fetchHistory } from "./src/fetcher";
 import ProfileCard from "./src/cards/ProfileCard";
 import TopLanguagesCard from "./src/cards/TopLanguagesCard";
@@ -32,7 +32,9 @@ async function main() {
         show_icons: core.getBooleanInput("profile_card_show_icons"),
         hide_rank: core.getBooleanInput("profile_card_hide_rank"),
         line_height: parseNumber(core.getInput("profile_card_line_height")),
-        title: core.getInput("profile_card_title"),
+        title: core.getInput("profile_card_title")
+          ? core.getInput("profile_card_title")
+          : `Code::Stats of ${username}`,
         title_color: core.getInput("common_title_color"),
         icon_color: core.getInput("common_icon_color"),
         text_color: core.getInput("common_text_color"),
@@ -60,7 +62,9 @@ async function main() {
         layout: core.getBooleanInput("toplangs_card_compact_layout")
           ? "compact"
           : undefined,
-        title: core.getInput("toplangs_card_title"),
+        title: core.getInput("toplangs_card_title")
+          ? core.getInput("toplangs_card_title")
+          : `Code::Stats of ${username}`,
         title_color: core.getInput("common_title_color"),
         text_color: core.getInput("common_text_color"),
         bg_color: core.getInput("common_bg_color"),
@@ -84,8 +88,7 @@ async function main() {
           core.getInput("history_card_language_count")
         ),
         hide_legend: core.getBooleanInput("history_card_hide_legend"),
-        reverse_order: core.getBooleanInput("history_card_reverse_order")
-        ,
+        reverse_order: core.getBooleanInput("history_card_reverse_order"),
         width: 500,
         height: 300,
         title_color: core.getInput("common_title_color"),
@@ -105,7 +108,6 @@ async function main() {
 
     console.log(`Generated ./codestats_history_${username}.svg`);
     fs.writeFileSync(`./codestats_history_${username}.svg`, historycard);
-
   } catch (error) {
     if (error instanceof Error) {
       core.setFailed(error.message);
@@ -115,4 +117,4 @@ async function main() {
   }
 }
 
-main()
+main();
