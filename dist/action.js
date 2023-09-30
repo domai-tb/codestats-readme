@@ -77,22 +77,18 @@ function main() {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    printInputVars();
-                    core.setFailed('Does GitHub reconize this change?');
-                    _a.label = 1;
-                case 1:
-                    _a.trys.push([1, 5, , 6]);
+                    _a.trys.push([0, 4, , 5]);
                     username = core.getInput("username");
                     // Fetch Code::Stats API
                     console.log("Fetch account data: codestats.net/users/".concat(username));
                     return [4 /*yield*/, (0, fetcher_1.fetchProfile)(username)];
-                case 2:
+                case 1:
                     profile = _a.sent();
                     return [4 /*yield*/, (0, fetcher_1.fetchTopLanguages)(username)];
-                case 3:
+                case 2:
                     toplang = _a.sent();
                     return [4 /*yield*/, (0, fetcher_1.fetchHistory)(username, (0, utils_1.parseNumber)(core.getInput("history_card_days_count")))];
-                case 4:
+                case 3:
                     history_1 = _a.sent();
                     profilecard = server_1.default.renderToStaticMarkup(new ProfileCard_1.default(profile.username, profile.xp, profile.recentXp, {
                         hide: (0, utils_1.parseArray)(core.getInput("profile_card_hide_lines")),
@@ -156,8 +152,8 @@ function main() {
                     }).render());
                     console.log("Generated ./codestats_history_".concat(username, ".svg"));
                     fs.writeFileSync("./codestats_history_".concat(username, ".svg"), historycard);
-                    return [3 /*break*/, 6];
-                case 5:
+                    return [3 /*break*/, 5];
+                case 4:
                     error_1 = _a.sent();
                     if (error_1 instanceof Error) {
                         core.setFailed(error_1.message);
@@ -165,31 +161,10 @@ function main() {
                     else {
                         console.log(error_1);
                     }
-                    return [3 /*break*/, 6];
-                case 6: return [2 /*return*/];
+                    return [3 /*break*/, 5];
+                case 5: return [2 /*return*/];
             }
         });
     });
-}
-function printInputVars() {
-    console.log('username: ' + core.getInput("username"));
-    console.log('profile_card_hide_lines: ' + (0, utils_1.parseArray)(core.getInput("profile_card_hide_lines")));
-    console.log("profile_card_show_icons: " + core.getBooleanInput("profile_card_show_icons"));
-    console.log("profile_card_hide_rank: " + core.getBooleanInput("profile_card_hide_rank"));
-    console.log("profile_card_line_height: " +
-        (0, utils_1.parseNumber)(core.getInput("profile_card_line_height")));
-    console.log("profile_card_title: " + core.getInput("profile_card_title")
-        ? core.getInput("profile_card_title")
-        : "Code::Stats of <username var>");
-    console.log("common_title_color" + core.getInput("common_title_color"));
-    console.log('common_icon_color: ' + core.getInput("common_icon_color"));
-    console.log("common_text_color: " + core.getInput("common_text_color"));
-    console.log("common_bg_color: " + core.getInput("common_bg_color"));
-    console.log("common_hide_title: " + core.getBooleanInput("common_hide_title"));
-    console.log("common_hide_border: " + core.getBooleanInput("common_hide_border"));
-    console.log('theme: ' +
-        core.getInput("theme") in themes_json_1.default
-        ? core.getInput("theme")
-        : "default");
 }
 main();
