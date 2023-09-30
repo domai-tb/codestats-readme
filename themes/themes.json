@@ -214,11 +214,5 @@
 		"icon_color": "61dafb",
 		"text_color": "ffffff",
 		"bg_color": "20232a"
-	},
-	"domai-tb": {
-		"title_color": "rgba(255, 255, 255, 0.5)",
-		"icon_color": "rgb(61, 133, 143)",
-		"text_color": "rgb(61, 133, 143)",
-		"bg_color": "rgba(255, 255, 255, 0)"
 	}
 }
