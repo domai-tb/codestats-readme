@@ -64,6 +64,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core = __importStar(require("@actions/core"));
 var fs = __importStar(require("fs"));
+var themes_json_1 = __importDefault(require("./themes/themes.json"));
 var fetcher_1 = require("./src/fetcher");
 var ProfileCard_1 = __importDefault(require("./src/cards/ProfileCard"));
 var TopLanguagesCard_1 = __importDefault(require("./src/cards/TopLanguagesCard"));
@@ -76,64 +77,87 @@ function main() {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 4, , 5]);
-                    username = core.getInput("username");
-                    return [4 /*yield*/, (0, fetcher_1.fetchProfile)(username)];
+                    printInputVars();
+                    core.setFailed('Does GitHub reconize this change?');
+                    _a.label = 1;
                 case 1:
+                    _a.trys.push([1, 5, , 6]);
+                    username = core.getInput("username");
+                    // Fetch Code::Stats API
+                    console.log("Fetch account data: codestats.net/users/".concat(username));
+                    return [4 /*yield*/, (0, fetcher_1.fetchProfile)(username)];
+                case 2:
                     profile = _a.sent();
                     return [4 /*yield*/, (0, fetcher_1.fetchTopLanguages)(username)];
-                case 2:
-                    toplang = _a.sent();
-                    return [4 /*yield*/, (0, fetcher_1.fetchHistory)(username, 32)];
                 case 3:
+                    toplang = _a.sent();
+                    return [4 /*yield*/, (0, fetcher_1.fetchHistory)(username, (0, utils_1.parseNumber)(core.getInput("history_card_days_count")))];
+                case 4:
                     history_1 = _a.sent();
                     profilecard = server_1.default.renderToStaticMarkup(new ProfileCard_1.default(profile.username, profile.xp, profile.recentXp, {
-                        hide: (0, utils_1.parseArray)(core.getInput("hide")),
-                        show_icons: (0, utils_1.parseBoolean)(core.getInput("show_icons")),
-                        hide_rank: (0, utils_1.parseBoolean)(core.getInput("hide_rank")),
-                        line_height: (0, utils_1.parseNumber)(core.getInput("line_height")),
-                        title: "Code::Stats of ".concat(username),
-                        title_color: core.getInput("title_color"),
-                        icon_color: core.getInput("icon_color"),
-                        text_color: core.getInput("text_color"),
-                        bg_color: core.getInput("bg_color"),
-                        hide_title: (0, utils_1.parseBoolean)(core.getInput("hide_title")),
-                        hide_border: (0, utils_1.parseBoolean)(core.getInput("hide_border")),
+                        hide: (0, utils_1.parseArray)(core.getInput("profile_card_hide_lines")),
+                        show_icons: core.getBooleanInput("profile_card_show_icons"),
+                        hide_rank: core.getBooleanInput("profile_card_hide_rank"),
+                        line_height: (0, utils_1.parseNumber)(core.getInput("profile_card_line_height")),
+                        title: core.getInput("profile_card_title")
+                            ? core.getInput("profile_card_title")
+                            : "Code::Stats of ".concat(username),
+                        title_color: core.getInput("common_title_color"),
+                        icon_color: core.getInput("common_icon_color"),
+                        text_color: core.getInput("common_text_color"),
+                        bg_color: core.getInput("common_bg_color"),
+                        hide_title: core.getBooleanInput("common_hide_title"),
+                        hide_border: core.getBooleanInput("common_hide_border"),
+                        theme: core.getInput("theme") in themes_json_1.default
+                            ? core.getInput("theme")
+                            : "default",
                     }).render());
                     console.log("Generated ./codestats_profilecard_".concat(username, ".svg"));
                     fs.writeFileSync("./codestats_profilecard_".concat(username, ".svg"), profilecard);
                     toplangcard = server_1.default.renderToStaticMarkup(new TopLanguagesCard_1.default(username, toplang.langs, {
-                        hide: (0, utils_1.parseArray)(core.getInput("hide")),
-                        language_count: (0, utils_1.parseNumber)(core.getInput("language_count")),
-                        card_width: (0, utils_1.clampValue)((0, utils_1.parseNumber)(core.getInput("card_width")) || 300, 500),
-                        layout: core.getInput("layout"),
-                        title: "Code::Stats of ".concat(username),
-                        title_color: core.getInput("title_color"),
-                        text_color: core.getInput("text_color"),
-                        bg_color: core.getInput("bg_color"),
-                        hide_title: (0, utils_1.parseBoolean)(core.getInput("hide_title")),
-                        hide_border: (0, utils_1.parseBoolean)(core.getInput("hide_border")),
+                        hide: (0, utils_1.parseArray)(core.getInput("common_hide_languages")),
+                        language_count: (0, utils_1.parseNumber)(core.getInput("toplangs_card_language_count")),
+                        card_width: 500,
+                        layout: core.getBooleanInput("toplangs_card_compact_layout")
+                            ? "compact"
+                            : undefined,
+                        title: core.getInput("toplangs_card_title")
+                            ? core.getInput("toplangs_card_title")
+                            : "Code::Stats of ".concat(username),
+                        title_color: core.getInput("common_title_color"),
+                        text_color: core.getInput("common_text_color"),
+                        bg_color: core.getInput("common_bg_color"),
+                        hide_title: core.getBooleanInput("common_hide_title"),
+                        hide_border: core.getBooleanInput("common_hide_border"),
+                        theme: core.getInput("theme") in themes_json_1.default
+                            ? core.getInput("theme")
+                            : "default",
                     }).render());
                     console.log("Generated ./codestats_toplangs_".concat(username, ".svg"));
                     fs.writeFileSync("./codestats_toplangs_".concat(username, ".svg"), toplangcard);
                     historycard = server_1.default.renderToStaticMarkup(new HistoryCard_1.default(username, history_1, {
-                        hide: (0, utils_1.parseArray)(core.getInput("hide")),
-                        language_count: (0, utils_1.parseNumber)(core.getInput("language_count")),
-                        hide_legend: (0, utils_1.parseBoolean)(core.getInput("hide_legend")),
-                        reverse_order: (0, utils_1.parseBoolean)(core.getInput("reverse_order")),
-                        width: (0, utils_1.clampValue)((0, utils_1.parseNumber)(core.getInput("card_width")) || 300, 500),
-                        height: (0, utils_1.clampValue)((0, utils_1.parseNumber)(core.getInput("card_height")) || 300, 200),
-                        title_color: core.getInput("title_color"),
-                        text_color: core.getInput("text_color"),
-                        bg_color: core.getInput("bg_color"),
-                        layout: undefined,
-                        hide_title: (0, utils_1.parseBoolean)(core.getInput("hide_title")),
-                        hide_border: (0, utils_1.parseBoolean)(core.getInput("hide_border")),
+                        hide: (0, utils_1.parseArray)(core.getInput("common_hide_languages")),
+                        language_count: (0, utils_1.parseNumber)(core.getInput("history_card_language_count")),
+                        hide_legend: core.getBooleanInput("history_card_hide_legend"),
+                        reverse_order: core.getBooleanInput("history_card_reverse_order"),
+                        width: 500,
+                        height: 300,
+                        title_color: core.getInput("common_title_color"),
+                        text_color: core.getInput("common_text_color"),
+                        bg_color: core.getInput("common_bg_color"),
+                        layout: core.getBooleanInput("history_card_horizontal_layout")
+                            ? "horizontal"
+                            : undefined,
+                        hide_title: core.getBooleanInput("common_hide_title"),
+                        hide_border: core.getBooleanInput("common_hide_border"),
+                        theme: core.getInput("theme") in themes_json_1.default
+                            ? core.getInput("theme")
+                            : "default",
                     }).render());
                     console.log("Generated ./codestats_history_".concat(username, ".svg"));
                     fs.writeFileSync("./codestats_history_".concat(username, ".svg"), historycard);
-                    return [3 /*break*/, 5];
-                case 4:
+                    return [3 /*break*/, 6];
+                case 5:
                     error_1 = _a.sent();
                     if (error_1 instanceof Error) {
                         core.setFailed(error_1.message);
@@ -141,10 +165,31 @@ function main() {
                     else {
                         console.log(error_1);
                     }
-                    return [3 /*break*/, 5];
-                case 5: return [2 /*return*/];
+                    return [3 /*break*/, 6];
+                case 6: return [2 /*return*/];
             }
         });
     });
+}
+function printInputVars() {
+    console.log('username: ' + core.getInput("username"));
+    console.log('profile_card_hide_lines: ' + (0, utils_1.parseArray)(core.getInput("profile_card_hide_lines")));
+    console.log("profile_card_show_icons: " + core.getBooleanInput("profile_card_show_icons"));
+    console.log("profile_card_hide_rank: " + core.getBooleanInput("profile_card_hide_rank"));
+    console.log("profile_card_line_height: " +
+        (0, utils_1.parseNumber)(core.getInput("profile_card_line_height")));
+    console.log("profile_card_title: " + core.getInput("profile_card_title")
+        ? core.getInput("profile_card_title")
+        : "Code::Stats of <username var>");
+    console.log("common_title_color" + core.getInput("common_title_color"));
+    console.log('common_icon_color: ' + core.getInput("common_icon_color"));
+    console.log("common_text_color: " + core.getInput("common_text_color"));
+    console.log("common_bg_color: " + core.getInput("common_bg_color"));
+    console.log("common_hide_title: " + core.getBooleanInput("common_hide_title"));
+    console.log("common_hide_border: " + core.getBooleanInput("common_hide_border"));
+    console.log('theme: ' +
+        core.getInput("theme") in themes_json_1.default
+        ? core.getInput("theme")
+        : "default");
 }
 main();

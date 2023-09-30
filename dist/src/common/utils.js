@@ -208,11 +208,11 @@ function trunc(number, digits) {
 exports.trunc = trunc;
 function parseNumber(number) {
     if (typeof number === 'undefined' || typeof number === 'number') {
-        return number;
+        return 0;
     }
     var n = parseFloat(number);
     if (isNaN(n)) {
-        return undefined;
+        return 0;
     }
     return n;
 }
