@@ -1,7 +1,5 @@
 .vercel
 .env
-node_modules
 .vscode/
 coverage
 yarn-error.log
-dist/

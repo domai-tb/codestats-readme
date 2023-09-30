@@ -214,11 +214,5 @@
 		"icon_color": "61dafb",
 		"text_color": "ffffff",
 		"bg_color": "20232a"
-	},
-	"snownight": {
-		"title_color": "ffffff",
-		"icon_color": "ffffff",
-		"text_color": "ffffff",
-		"bg_color": "000000a0"
 	}
 }

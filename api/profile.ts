@@ -17,7 +17,7 @@ export interface query {
 	cache_seconds?: string
 	title?: string
 
-	// Mater
+	// Master
 	bg_color?: string
 	hide_border?: string
 	hide_title?: string
