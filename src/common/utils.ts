@@ -145,13 +145,13 @@ export function trunc(number: number, digits = 0) {
 	return Math.round(number * pow) / pow
 }
 
-export function parseNumber(number: string | number | undefined): number | undefined {
+export function parseNumber(number: string | number | undefined): number {
 	if (typeof number === 'undefined' || typeof number === 'number') {
-		return number
+		return 0
 	}
 	const n = parseFloat(number)
 	if (isNaN(n)) {
-		return undefined
+		return 0
 	}
 	return n
 }

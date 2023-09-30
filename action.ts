@@ -1,5 +1,6 @@
 import * as core from "@actions/core";
 import * as fs from "fs";
+import themes from "./themes/themes.json";
 import { fetchProfile, fetchTopLanguages, fetchHistory } from "./src/fetcher";
 import ProfileCard from "./src/cards/ProfileCard";
 import TopLanguagesCard from "./src/cards/TopLanguagesCard";
@@ -13,28 +14,39 @@ import {
 } from "./src/common/utils";
 
 async function main() {
+
   try {
     const username = core.getInput("username");
 
     // Fetch Code::Stats API
+    console.log(`Fetch account data: codestats.net/users/${username}`);
     const profile = await fetchProfile(username);
     const toplang = await fetchTopLanguages(username);
-    const history = await fetchHistory(username, 32);
+    const history = await fetchHistory(
+      username,
+      parseNumber(core.getInput("history_card_days_count"))
+    );
 
     // Generate Profile Summary Card
     const profilecard = ReactDOMServer.renderToStaticMarkup(
       new ProfileCard(profile.username, profile.xp, profile.recentXp, {
-        hide: parseArray(core.getInput("hide")),
-        show_icons: true, // parseBoolean(core.getInput("show_icons")),
-        hide_rank: false, // parseBoolean(core.getInput("hide_rank")),
-        line_height: 45, // parseNumber(core.getInput("line_height")),
-        title: `Code::Stats of ${username}`, // core.getInput("title"),
-        title_color: core.getInput("title_color"),
-        icon_color: core.getInput("icon_color"),
-        text_color: core.getInput("text_color"),
-        bg_color: core.getInput("bg_color"),
-        hide_title: false, // parseBoolean(core.getInput("hide_title")),
-        hide_border: false, //parseBoolean(core.getInput("hide_border")),
+        hide: parseArray(core.getInput("profile_card_hide_lines")),
+        show_icons: core.getBooleanInput("profile_card_show_icons"),
+        hide_rank: core.getBooleanInput("profile_card_hide_rank"),
+        line_height: parseNumber(core.getInput("profile_card_line_height")),
+        title: core.getInput("profile_card_title")
+          ? core.getInput("profile_card_title")
+          : `Code::Stats of ${username}`,
+        title_color: core.getInput("common_title_color"),
+        icon_color: core.getInput("common_icon_color"),
+        text_color: core.getInput("common_text_color"),
+        bg_color: core.getInput("common_bg_color"),
+        hide_title: core.getBooleanInput("common_hide_title"),
+        hide_border: core.getBooleanInput("common_hide_border"),
+        theme:
+          core.getInput("theme") in themes
+            ? (core.getInput("theme") as keyof typeof themes)
+            : "default",
       }).render()
     );
 
@@ -44,19 +56,26 @@ async function main() {
     // Generate Top Languages Card
     const toplangcard = ReactDOMServer.renderToStaticMarkup(
       new TopLanguagesCard(username, toplang.langs, {
-        hide: parseArray(core.getInput("hide")),
-        language_count: 21, // parseNumber(core.getInput("language_count")),
-        card_width: clampValue(
-          parseNumber(core.getInput("card_width")) || 300,
-          500
+        hide: parseArray(core.getInput("common_hide_languages")),
+        language_count: parseNumber(
+          core.getInput("toplangs_card_language_count")
         ),
-        layout: "compact", // core.getInput("layout")
-        title: `Code::Stats of ${username}`, // core.getInput("title"),
-        title_color: core.getInput("title_color"),
-        text_color: core.getInput("text_color"),
-        bg_color: core.getInput("bg_color"),
-        hide_title: false, // parseBoolean(core.getInput("hide_title")),
-        hide_border: false, //parseBoolean(core.getInput("hide_border")),
+        card_width: 500,
+        layout: core.getBooleanInput("toplangs_card_compact_layout")
+          ? "compact"
+          : undefined,
+        title: core.getInput("toplangs_card_title")
+          ? core.getInput("toplangs_card_title")
+          : `Code::Stats of ${username}`,
+        title_color: core.getInput("common_title_color"),
+        text_color: core.getInput("common_text_color"),
+        bg_color: core.getInput("common_bg_color"),
+        hide_title: core.getBooleanInput("common_hide_title"),
+        hide_border: core.getBooleanInput("common_hide_border"),
+        theme:
+          core.getInput("theme") in themes
+            ? (core.getInput("theme") as keyof typeof themes)
+            : "default",
       }).render()
     );
 
@@ -66,27 +85,41 @@ async function main() {
     // Generate History Card
     const historycard = ReactDOMServer.renderToStaticMarkup(
       new HistoryCard(username, history, {
-        hide: parseArray(core.getInput("hide")),
-        language_count: 21, // parseNumber(core.getInput("language_count")),
-        hide_legend: parseBoolean(core.getInput("hide_legend")),
-        reverse_order: parseBoolean(core.getInput("reverse_order")),
-        width: clampValue(parseNumber(core.getInput("card_width")) || 300, 500),
-        height: clampValue(parseNumber(core.getInput("height")) || 300, 200),
-        title_color: core.getInput("title_color"),
-        text_color: core.getInput("text_color"),
-        bg_color: core.getInput("bg_color"),
-        layout: undefined, // core.getInput("layout")
-        hide_title: false, // parseBoolean(core.getInput("hide_title")),
-        hide_border: false, //parseBoolean(core.getInput("hide_border")),
+        hide: parseArray(core.getInput("common_hide_languages")),
+        language_count: parseNumber(
+          core.getInput("history_card_language_count")
+        ),
+        hide_legend: core.getBooleanInput("history_card_hide_legend"),
+        reverse_order: core.getBooleanInput("history_card_reverse_order"),
+        width: 500,
+        height: 300,
+        title_color: core.getInput("common_title_color"),
+        text_color: core.getInput("common_text_color"),
+        bg_color: core.getInput("common_bg_color"),
+        layout: core.getBooleanInput("history_card_horizontal_layout")
+          ? "horizontal"
+          : undefined,
+        hide_title: core.getBooleanInput("common_hide_title"),
+        title: core.getInput("history_card_title")
+          ? core.getInput("history_card_title")
+          : `Last ${parseNumber(core.getInput("history_card_language_count"))} days XP history`,
+        hide_border: core.getBooleanInput("common_hide_border"),
+        theme:
+          core.getInput("theme") in themes
+            ? (core.getInput("theme") as keyof typeof themes)
+            : "default",
       }).render()
     );
 
     console.log(`Generated ./codestats_history_${username}.svg`);
     fs.writeFileSync(`./codestats_history_${username}.svg`, historycard);
   } catch (error) {
-    console.log(error);
-    //core.setFailed(error.message);
+    if (error instanceof Error) {
+      core.setFailed(error.message);
+    } else {
+      console.log(error);
+    }
   }
 }
 
-main()
+main();

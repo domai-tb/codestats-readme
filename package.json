@@ -21,7 +21,6 @@
 	"main": "index.js",
 	"scripts": {
 		"dev": "ts-node ./index.ts",
-		"action": "ts-node ./action.ts",
 		"build": "tsc --project ./tsconfig.json",
 		"start": "node dist/index.js",
 		"theme-readme-gen": "ts-node scripts/generate-theme-doc"

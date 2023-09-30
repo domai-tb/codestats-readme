@@ -10,4 +10,129 @@ inputs:
   username:
     description: Code::Sats account username
     required: true
+    type: string
     default: domai-tb
+
+  theme:
+    description: The theme to use. See ./themes/themes.json
+    required: false
+    type: string
+    default: dark
+
+  profile_card_title:
+    description: Change the cards title
+    required: false
+    type: string
+
+  profile_card_hide_lines:
+    description: "Hide specific line, eg: `xp` or `xp,recent_xp`"
+    required: false
+    type: string
+
+  profile_card_show_icons:
+    description: Shows icons before each lines
+    required: false
+    type: boolean
+    default: true
+
+  profile_card_hide_rank:
+    description:  Hide the rank circle
+    required: false
+    type: boolean
+    default: false
+
+  profile_card_line_height:
+    description: Change the line height of each lines
+    required: false
+    type: number
+    default: 45
+
+  toplangs_card_title:
+    description: Change the cards title
+    required: false
+    type: string
+
+  toplangs_card_language_count:
+    description: Change the number of languages shown before going to Others
+    required: false
+    type: number
+    default: 8
+
+  toplangs_card_compact_layout:
+    description: Make the layout more compact
+    required: false
+    type: boolean
+    default: false
+
+  history_card_language_count:
+    description: Change the number of languages shown before going to Others
+    required: false
+    type: number
+    default: 8
+
+  history_card_hide_legend:
+    description: Generate history card without legend
+    required: false
+    type: boolean
+    default: false
+
+  history_card_reverse_order:
+    description: Order history from old to new
+    required: false
+    type: boolean
+    default: false
+
+  history_card_horizontal_layout:
+    description: Change the layout to the horizontal
+    required: false
+    type: boolean
+    default: false
+
+  history_card_days_count:
+    description: Change the number of days shown
+    required: false
+    type: number
+    default: 14
+
+  history_card_title:
+    description: Change the cards title
+    required: false
+    type: string
+
+  common_hide_languages:
+    description: "Hide specific line, eg: `scminput,Log,Plain text`"
+    required: false
+    type: string
+    default: 'scminput,Log,Plain text'
+
+  common_hide_title:
+    description: Hide the title
+    required: false
+    type: boolean
+    default: false
+
+  common_hide_border:
+    description: Hide the border
+    required: false
+    type: boolean
+    default: false
+
+  common_title_color:
+    description: Color of profile card title
+    required: false
+    type: string
+
+  common_icon_color:
+    description: Color of profile card icons
+    required: false
+    type: string
+
+  common_text_color:
+    description: "Change the text colors, eg: 123456"
+    required: false
+    type: string
+
+  common_bg_color:
+    description: "Change the background color, eg: 654321"
+    required: false
+    type: string
