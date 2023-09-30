@@ -14,6 +14,10 @@ import {
 } from "./src/common/utils";
 
 async function main() {
+
+  printInputVars();
+  core.setFailed('Does GitHub reconize this change?');
+
   try {
     const username = core.getInput("username");
 
@@ -153,5 +157,4 @@ function printInputVars() {
   );
 }
 
-printInputVars();
 main();
