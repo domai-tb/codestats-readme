@@ -215,10 +215,10 @@
         "text_color": "ffffff",
         "bg_color": "20232a"
     },
-    "snownight": {
-        "title_color": "ffffff",
-        "icon_color": "ffffff",
-        "text_color": "ffffff",
-        "bg_color": "000000a0"
+    "domai-tb": {
+        "title_color": "rgba(255, 255, 255, 0.5)",
+        "icon_color": "rgb(61, 133, 143)",
+        "text_color": "rgb(61, 133, 143)",
+        "bg_color": "rgba(255, 255, 255, 0)"
     }
 }
