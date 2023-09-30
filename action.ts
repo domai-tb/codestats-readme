@@ -118,4 +118,40 @@ async function main() {
   }
 }
 
+function printInputVars() {
+  console.log('username: '+core.getInput("username"));
+  console.log('profile_card_hide_lines: '+parseArray(core.getInput("profile_card_hide_lines")));
+  console.log(
+    "profile_card_show_icons: " + core.getBooleanInput("profile_card_show_icons")
+  );
+  console.log(
+    "profile_card_hide_rank: " + core.getBooleanInput("profile_card_hide_rank")
+  );
+  console.log(
+    "profile_card_line_height: " +
+      parseNumber(core.getInput("profile_card_line_height"))
+  );
+  console.log(
+    "profile_card_title: " + core.getInput("profile_card_title")
+      ? core.getInput("profile_card_title")
+      : `Code::Stats of <username var>`
+  );
+  console.log("common_title_color" + core.getInput("common_title_color"));
+  console.log('common_icon_color: '+ core.getInput("common_icon_color"));
+  console.log("common_text_color: " + core.getInput("common_text_color"));
+  console.log("common_bg_color: " + core.getInput("common_bg_color"));
+  console.log(
+    "common_hide_title: " + core.getBooleanInput("common_hide_title")
+  );
+  console.log(
+    "common_hide_border: " + core.getBooleanInput("common_hide_border")
+  );
+  console.log('theme: ' + 
+    core.getInput("theme") in themes
+      ? (core.getInput("theme") as keyof typeof themes)
+      : "default"
+  );
+}
+
+printInputVars();
 main();
