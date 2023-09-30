@@ -100,6 +100,9 @@ async function main() {
           ? "horizontal"
           : undefined,
         hide_title: core.getBooleanInput("common_hide_title"),
+        title: core.getInput("history_card_title")
+          ? core.getInput("history_card_title")
+          : `Last ${parseNumber(core.getInput("history_card_language_count"))} days XP history`,
         hide_border: core.getBooleanInput("common_hide_border"),
         theme:
           core.getInput("theme") in themes

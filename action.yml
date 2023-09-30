@@ -94,6 +94,11 @@ inputs:
     type: number
     default: 14
 
+  history_card_title:
+    description: Change the cards title
+    required: false
+    type: string
+
   common_hide_languages:
     description: "Hide specific line, eg: `scminput,Log,Plain text`"
     required: false

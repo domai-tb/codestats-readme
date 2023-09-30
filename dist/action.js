@@ -145,6 +145,9 @@ function main() {
                             ? "horizontal"
                             : undefined,
                         hide_title: core.getBooleanInput("common_hide_title"),
+                        title: core.getInput("history_card_title")
+                            ? core.getInput("history_card_title")
+                            : "Last ".concat((0, utils_1.parseNumber)(core.getInput("history_card_language_count")), " days XP history"),
                         hide_border: core.getBooleanInput("common_hide_border"),
                         theme: core.getInput("theme") in themes_json_1.default
                             ? core.getInput("theme")
